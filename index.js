@@ -61,32 +61,25 @@ const shoppingCart = {
   addItem: function (title, price) {
     this.items.push({ title, price });
     this.sumOfItems += price;
+    return this;
   },
   removeItem: function (title) {
     for (const [index, item] of this.items.entries()) {
       if (item.title === title) {
         this.sumOfItems -= item.price;
         this.items.splice(index);
-        return;
+        return this;
       }
     }
   },
   calculateTotalPrice: function () {
     console.log(`Sum of all items: ${this.sumOfItems}`);
+    return this;
   },
 };
 
-shoppingCart.addItem("Laptop", 1500);
-shoppingCart.addItem("Iphone", 900);
-
-shoppingCart.removeItem("Laptop");
-
-shoppingCart.calculateTotalPrice();
-
-shoppingCart.addItem("Iphone", 900);
-
-shoppingCart.calculateTotalPrice();
-
-shoppingCart.addItem("Laptop", 1500);
-
-shoppingCart.calculateTotalPrice();
+shoppingCart
+  .addItem("Laptop", 1500)
+  .addItem("Laptop", 1500)
+  .removeItem("Laptop")
+  .calculateTotalPrice();
